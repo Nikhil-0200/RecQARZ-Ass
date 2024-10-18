@@ -59,7 +59,7 @@ const Login = () => {
     >
       <div className="absolute inset-0 bg-red-500 opacity-85"></div>
       <div className="relative z-10 bg-white w-full h-full flex flex-col-row lg:flex-row-reverse justify-between px-10 py-5">
-        <div className="hidden lg:block w-[40%]"> {/* Show only on large screens */}
+        <div className="hidden lg:block w-[40%]">
           <img
             className="w-full h-full object-center"
             src={LoginImg}

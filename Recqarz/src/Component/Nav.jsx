@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 
 const Nav = () => {
-    const [isOpen, setIsOpen] = useState(false); // State to manage sidebar visibility
+    const [isOpen, setIsOpen] = useState(false);
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);

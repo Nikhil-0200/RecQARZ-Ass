@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import { RegisterImg } from "../../Images"; // Keep the import for larger screens
+import { RegisterImg } from "../../Images";
 import { Button } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
 
 const Register = () => {
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -41,7 +41,7 @@ const Register = () => {
 
             setData({ email: "", password: "", errorMessage: "", successMessage: "Registration successful!" });
             alert("Registration successful!");
-            navigate("/login"); // Redirect to login page after successful registration
+            navigate("/login");
         } catch (error) {
             console.error("Error during registration:", error);
             setData({ ...data, errorMessage: "Error during registration. Please try again." });
@@ -57,7 +57,7 @@ const Register = () => {
         <section className="relative w-full h-[90vh] px-16 pt-14 pb-16 bg-cover bg-center" style={{ backgroundImage: "url('/Images/bgImg.jpg')" }}>
             <div className="absolute inset-0 bg-red-500 opacity-85"></div>
             <div className="bg-white relative z-10 w-full h-full flex flex-col lg:flex-row justify-between px-10 py-5">
-                <div className="hidden lg:block w-[30%]"> {/* Show only on large screens */}
+                <div className="hidden lg:block w-[30%]">
                     <img
                         className="w-full h-full object-center"
                         src={RegisterImg}
