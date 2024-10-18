@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { LoginImg } from "../../Images";
+import { LoginImg } from "../../Images"; // Keep the import for larger screens
 import { Button } from "@chakra-ui/react";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -35,13 +35,9 @@ const Login = () => {
       const response = await axios.get("http://localhost:3001/users");
       const users = response.data;
 
-      console.log("Fetched users:", users);
-
       const user = users.find(
         (user) => user.email === data.email && user.password === data.password
       );
-
-      console.log("Logged-in user:", user);
 
       if (user) {
         alert("Login successful!");
@@ -51,15 +47,19 @@ const Login = () => {
         setData({ ...data, errorMessage: "Invalid email or password." });
       }
     } catch (error) {
-      console.error("Error logging in:", error.message); 
+      console.error("Error logging in:", error.message);
       setData({ ...data, errorMessage: "Error logging in. Please try again." });
     }
   }
 
   return (
-    <section className="w-full bg-[#FF6767] h-[90vh] p-16">
-      <div className="bg-white w-full h-full flex flex-row-reverse justify-between px-10 py-5">
-        <div className="w-[40%]">
+    <section
+      className="relative w-full h-[90vh] p-16 bg-cover bg-center"
+      style={{ backgroundImage: "url('/Images/bgImg.jpg')" }}
+    >
+      <div className="absolute inset-0 bg-red-500 opacity-85"></div>
+      <div className="relative z-10 bg-white w-full h-full flex flex-col-row lg:flex-row-reverse justify-between px-10 py-5">
+        <div className="hidden lg:block w-[40%]"> {/* Show only on large screens */}
           <img
             className="w-full h-full object-center"
             src={LoginImg}
@@ -67,7 +67,7 @@ const Login = () => {
           />
         </div>
 
-        <div className="w-1/2">
+        <div className="w-full lg:w-1/2">
           <h1 className="text-black text-2xl font-bold">Sign In</h1>
           <div className="flex flex-col gap-3 pt-3">
             <input

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { RegisterImg } from "../../Images";
+import { RegisterImg } from "../../Images"; // Keep the import for larger screens
 import { Button } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
@@ -15,34 +15,30 @@ const Register = () => {
 
     function handleChange(e) {
         let { name, value } = e.target;
-        setData({ ...data, [name]: value, errorMessage: "" }); // Clear error message on input change
+        setData({ ...data, [name]: value, errorMessage: "" });
     }
 
     async function registerRequest() {
         try {
-            // Fetch existing users from db.json
             const response = await axios.get("http://localhost:3001/users");
             const users = response.data;
 
-            // Check if the email already exists
             const userExists = users.find(user => user.email === data.email);
 
             if (userExists) {
                 setData({ ...data, errorMessage: "Email already exists." });
                 alert("Email already exists.");
-                return; // Stop the registration process
+                return; 
             }
 
-            // If email doesn't exist, proceed to register the user
             const newUser = {
-                id: users.length + 1, // Simple way to assign an ID
+                id: users.length + 1,
                 email: data.email,
                 password: data.password,
             };
 
             await axios.post("http://localhost:3001/users", newUser);
 
-            // Reset form and show success message
             setData({ email: "", password: "", errorMessage: "", successMessage: "Registration successful!" });
             alert("Registration successful!");
             navigate("/login"); // Redirect to login page after successful registration
@@ -58,9 +54,10 @@ const Register = () => {
     }
 
     return (
-        <section className="w-full bg-[#FF6767] h-[90vh] p-16">
-            <div className="bg-white w-full h-full flex flex-row justify-between px-10 py-5">
-                <div className="w-[30%]">
+        <section className="relative w-full h-[90vh] px-16 pt-14 pb-16 bg-cover bg-center" style={{ backgroundImage: "url('/Images/bgImg.jpg')" }}>
+            <div className="absolute inset-0 bg-red-500 opacity-85"></div>
+            <div className="bg-white relative z-10 w-full h-full flex flex-col lg:flex-row justify-between px-10 py-5">
+                <div className="hidden lg:block w-[30%]"> {/* Show only on large screens */}
                     <img
                         className="w-full h-full object-center"
                         src={RegisterImg}
@@ -68,7 +65,7 @@ const Register = () => {
                     />
                 </div>
 
-                <div className="w-1/2">
+                <div className="w-full lg:w-1/2">
                     <h1 className="text-black text-2xl font-bold">Sign Up</h1>
                     <div action="" className="flex flex-col gap-3 pt-3">
                         <input
